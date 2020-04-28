@@ -9,4 +9,3 @@
 
 rootProject.name = 'gist'
 //org.gradle.java.home= "C:\\Users\\psurti\\scoop\\apps\\oraclejdk\\current"
-include 'jackson'

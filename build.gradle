@@ -6,14 +6,11 @@
  * User Manual available at https://docs.gradle.org/5.3.1/userguide/tutorial_java_projects.html
  */
 plugins {
-    // Apply the java plugin to add support for Java
+    id 'eclipse'
+    id 'idea'
     id 'java'
-
-    // Apply the application plugin to add support for building an application
     id 'application'
-
-   id 'com.adarshr.test-logger' version '2.0.0'
-
+    id 'com.adarshr.test-logger' version '2.0.0'
 }
 
 repositories {
@@ -30,8 +27,15 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:27.0.1-jre'
 
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.3'
+
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
 }
 
 def styler = 'black red green yellow blue magenta cyan white'
@@ -44,6 +48,9 @@ def inputFiles = project.fileTree(dir: "src", include: "**/*.java")
  * RunWith: gradle -ai test --continuous
  */
 test {
+    //JUnit5
+    useJUnitPlatform()
+
     //inputFiles.each { println it }
     def app = inputFiles.sort{ it.lastModified() }.reverse().get(0)
     def idx = app.toString().indexOf("java\\")

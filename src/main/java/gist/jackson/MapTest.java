@@ -16,7 +16,9 @@ public class MapTest {
     }
 
     static Map<String,?> data() {
-        return Map.of("AQO_ACCT_NUM", "001", "XQO_CUST_NUM", "Prashant", "TCA_AMT", 10000);
+        return Map.of("AQO_ACCT_NUM", "001",
+                "XQO_CUST_NUM", "Prashant",
+                "TCA_AMT", 10000);
     }
 
     private MapTest testMap() throws JsonProcessingException {
@@ -26,7 +28,7 @@ public class MapTest {
 
     AnyDTO test2Data() {
         PropertyMap data = new PropertyMap();
-        data.setId(100l);
+        data.setId(200l);
         data.setName("foo");
         data.putAll(data());
         return data;

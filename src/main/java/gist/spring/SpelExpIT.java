@@ -6,21 +6,22 @@ package gist.spring;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-import java.util.*;
-
 public class SpelExpIT {
+    private final SpelExpressionParser parser = new SpelExpressionParser();
 
-    public void testInList() {
+    private void testInList() {
         test("{1,2,3}.contains(5)");
         test("{1,2,3}.contains(2)");
         test("{1,2,3}.contains(2) AND false");
+        test("{1,2,3}.contains(3)");
+        test("{1,2,3}.size() == 3");
+        test("{1,1,2,2,3,3,3}.stream().distinct().count() > 3");
     }
 
     void test(String val) {
-        SpelExpressionParser parser = new SpelExpressionParser();
         Expression exp = parser.parseExpression(val);
         Object message = exp.getValue();
-        System.out.println(val + "=" + message);
+        System.out.println(val + " =>" + message);
     }
 
     public static void main(String[] args) {

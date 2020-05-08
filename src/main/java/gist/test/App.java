@@ -12,7 +12,7 @@ public class App  {
     public String execute() {
         String o = data();
         o = o.toUpperCase();
-        System.out.println("Find DATA.." + (data().equals(o)));
+        System.out.println("Find DATA." + (data().equals(o)));
         return o;
     }
 

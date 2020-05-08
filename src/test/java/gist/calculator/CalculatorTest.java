@@ -34,8 +34,9 @@ class CalculatorTest {
         System.out.println("2+2");
         System.out.println("1+1");
         System.out.println("-1+1");
+
         assertAll(
-                () -> assertEquals(4, calc.add(1,3), "Ths output should be the sum of the two arguments"),
+                () -> assertEquals(4, calc.add(1,3), "Ths output should be the sum of the two arguments."),
                 () -> assertEquals(2, calc.add(1,1), "Doesn't add two positive numbers properly"),
                 () -> assertEquals(0, calc.add(-1,1), "Doesn't add a negative and a positive number properly"),
                 () -> assertNotNull(calc, "The calc variable should be initialized")
@@ -43,7 +44,6 @@ class CalculatorTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("Testing division")
     void divisionTest() {
         assumeFalse(0 > 5, "This message won't be displayed, and the test will proceed");

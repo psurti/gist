@@ -15,7 +15,7 @@ public class AppTest {
     public void execute() {
         App classUnderTest = new App();
         System.out.println("Running AppTest..");
-        assertEquals("DATA", classUnderTest.execute(), "Did not match DATA.");
+        assertEquals("DATA", classUnderTest.execute(), "Did not match DATA..");
     }
 
     @Test public void testFoo() {

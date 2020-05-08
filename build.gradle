@@ -9,8 +9,8 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'java'
-    id 'application'
     id 'com.adarshr.test-logger' version '2.0.0'
+    //id 'com.github.blindpirate.gogradle' version '0.11.4'
 }
 
 repositories {
@@ -22,6 +22,10 @@ repositories {
 apply from: 'modules/jackson.gradle'
 apply from: 'modules/spring.gradle'
 apply from: 'modules/test.gradle'
+apply from: 'modules/git.gradle'
+
+sourceCompatibility = '1.9'
+targetCompatibility = '1.9'
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
@@ -58,7 +62,11 @@ test {
     def appName = app.replace(".java","")
     println "${styler['yellow']("[Execute(test): "+ appName +"]")}"
 
-    include appName + '**'
+    //Run all tests when building else only last modified test
+    if (project.gradle.startParameter.taskNames.contains("build"))
+        include '**'
+    else
+        include appName + '**'
 
     testlogger {
         slowThreshold 0

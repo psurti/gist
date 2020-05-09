@@ -1,4 +1,4 @@
-package gist;
+package gist.spring.spel;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,7 +6,6 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 class SpelInListTest {
-
     private final SpelExpressionParser parser = new SpelExpressionParser();
 
     @Test

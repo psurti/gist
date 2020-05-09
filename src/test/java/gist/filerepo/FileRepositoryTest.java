@@ -12,9 +12,7 @@ import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.TreeWalk;
 import org.eclipse.jgit.treewalk.filter.PathFilter;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.slf4j.LoggerFactory;
@@ -22,10 +20,13 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class FileRepositoryTest {
+
 
     @ParameterizedTest
     @ValueSource(strings = {"modules/git.gradle", "modules/jackson.gradle","README.md"})
@@ -69,7 +70,7 @@ public class FileRepositoryTest {
     void getFile(String filepath) throws IOException {
         File file = FileRepository.getFile(filepath);
         System.out.println("Returned:" + file.getAbsolutePath());
-        Assertions.assertEquals("spring.gradle", file.getName(), "file not found");
+        assertEquals("spring.gradle", file.getName(), "file not found");
     }
 
     @ParameterizedTest
@@ -77,7 +78,7 @@ public class FileRepositoryTest {
     void getBytes(String filepath) throws IOException {
         byte[] bytes = FileRepository.getBytes(filepath);
         System.out.println(new String(bytes));
-        Assertions.assertNotNull(bytes, new String(bytes));
+        assertNotNull(bytes, new String(bytes));
     }
 
     @ParameterizedTest
@@ -86,9 +87,9 @@ public class FileRepositoryTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
         FileRepository.load(out, filepath);
         out.close();
-        String data = out.toString(StandardCharsets.UTF_8);
+        String data = out.toString();
         System.out.println(data);
-        Assertions.assertNotNull(data, data);
+        assertNotNull(data, data);
 
     }
 }

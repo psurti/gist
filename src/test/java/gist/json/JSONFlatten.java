@@ -2,7 +2,6 @@ package gist.json;
 
 import com.github.wnameless.json.flattener.JsonFlattener;
 import com.github.wnameless.json.unflattener.JsonUnflattener;
-import gist.filerepo.FileRepository;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import org.junit.jupiter.api.Test;
@@ -11,18 +10,18 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Map;
 
-/**
- * @author Crunchify.com
- *
- */
+import static gist.filerepo.FileRepository.getFile;
 
 class JSONFlatten {
+
     @Test
     void flatten() {
+
         JSONParser parser = new JSONParser();
         try {
-            File file = FileRepository.getFile("src/test/java/gist/file.json");
+            File file = getFile("src/test/java/gist/json/file.json");
             System.out.println( "file=" + file);
+
             Object obj = parser.parse(new FileReader(file));
             //Object obj = parser.parse(new FileReader("C:\\Users\\psurti\\git\\gist\\src\\test\\java\\gist\\file.json"));
             JSONObject jsonObject = (JSONObject) obj;
@@ -36,9 +35,7 @@ class JSONFlatten {
             log("\n=====Flatten As Map=====\n" + flattenedJson);
             // We are using Java8 forEach loop. More info: https://crunchify.com/?p=8047
             String prefix = "export SAS_FRAUDTRANSACTION_";
-            flattenedJsonMap.forEach((k, v) -> {
-                log( prefix + k.replace('.', '_').toUpperCase().replace('[', '_').replace(']', '_') + "=\"" + v +"\"");
-            });
+            flattenedJsonMap.forEach((k, v) -> log( prefix + k.replace('.', '_').toUpperCase().replace('[', '_').replace(']', '_') + "=\"" + v +"\""));
 
             // Unflatten it back to original JSON
             String nestedJson = JsonUnflattener.unflatten(flattenedJson);
@@ -50,6 +47,5 @@ class JSONFlatten {
 
     private static void log(String flattenedJson) {
         System.out.println(flattenedJson);
-
     }
 }

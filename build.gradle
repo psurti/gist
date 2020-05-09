@@ -11,6 +11,7 @@ plugins {
     id 'java'
     id 'com.adarshr.test-logger' version '2.0.0'
     //id 'com.github.blindpirate.gogradle' version '0.11.4'
+    id "me.champeau.gradle.jmh" version "0.5.0"
 }
 
 repositories {
@@ -24,8 +25,8 @@ apply from: 'modules/spring.gradle'
 apply from: 'modules/test.gradle'
 apply from: 'modules/git.gradle'
 
-sourceCompatibility = '1.9'
-targetCompatibility = '1.9'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
@@ -58,7 +59,7 @@ test {
     //inputFiles.each { println it }
     def app = inputFiles.sort{ it.lastModified() }.reverse().get(0)
     def idx = app.toString().indexOf("java\\")
-    app =  app.toString().substring(idx+5);
+    app =  app.toString().substring(idx+5)
     def appName = app.replace(".java","")
     println "${styler['yellow']("[Execute(test): "+ appName +"]")}"
 
@@ -93,10 +94,14 @@ project.task("runx", type: JavaExec)  {
     //allInputFiles.each { println it }
     def app = allInputFiles.sort{ it.lastModified() }.reverse().get(0)
     def idx = app.toString().indexOf("java\\")
-    app =  app.toString().substring(idx+5);
+    app =  app.toString().substring(idx+5)
     def appName = app.replaceAll("\\\\", ".").replace(".java","")
     println "${styler['yellow']("[Execute(main): "+ appName +"]")}"
 
     classpath = sourceSets.main.runtimeClasspath
     main = appName
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
 }

@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class FileRepository {
 
@@ -28,12 +29,16 @@ public class FileRepository {
         loggerFactory.getLogger("org.eclipse.jgit").setLevel(Level.OFF);
     }
 
-    public static final File getFile(String path) throws IOException {
-        return (File) getData(path, null, false);
+    public static File getFile(String path) throws IOException {
+        File file = (File) getData(path, null, false);
+        Objects.requireNonNull(file, "no file for " + path);
+        return file;
     }
 
     public static byte[] getBytes(String path) throws IOException {
-        return (byte[]) getData(path, null, true);
+        byte[] data = (byte[]) getData(path, null, true);
+        Objects.requireNonNull(data, "no byte[] data for " + path);
+        return data;
     }
 
     public static void load(OutputStream out, String path) throws IOException {
@@ -67,10 +72,10 @@ public class FileRepository {
                     if (returnBytes) ret = loader.getBytes();
                 }
                 if (!found) {
-                    new FileNotFoundException(path);
+                    throw new FileNotFoundException(path);
                 }
             }
-            revWalk.dispose();;
+            revWalk.dispose();
         }
 
         return ret;

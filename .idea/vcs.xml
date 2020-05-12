@@ -2,5 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/bmuschko/link-verifier" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/inconshreveable/mousetrap" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/spf13/cobra" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/spf13/pflag" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/mvdan.cc/xurls" vcs="Git" />
   </component>
 </project>

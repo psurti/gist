@@ -22,6 +22,6 @@
         <module name="gist.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.9" />
   </component>
 </project>

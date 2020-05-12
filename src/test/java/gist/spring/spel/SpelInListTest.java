@@ -15,6 +15,8 @@ class SpelInListTest {
         test("{1,2,3}.contains(2) AND false", Boolean.FALSE);
         test("{1,2,3}.contains(3)", Boolean.TRUE);
         test("{1,2,3}.size() == 3", Boolean.TRUE);
+        test("{'foo','bar'}.contains('foo')", Boolean.TRUE);
+        test("'foobar'.startsWith('foo')", Boolean.TRUE);
         test("{1,1,2,2,3,3,3}.stream().distinct().count() > 3", Boolean.FALSE);
     }
 

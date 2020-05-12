@@ -1,4 +1,6 @@
 {
-  "foo": "bar",
-  "delta": 3
+  "name" : "foo",
+  "type" : "string",
+  "value" : "bar",
+  "id" : 3
 }

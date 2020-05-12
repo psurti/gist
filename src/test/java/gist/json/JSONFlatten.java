@@ -2,23 +2,39 @@ package gist.json;
 
 import com.github.wnameless.json.flattener.JsonFlattener;
 import com.github.wnameless.json.unflattener.JsonUnflattener;
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
+import org.apache.commons.io.IOUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
 
 import static gist.filerepo.FileRepository.getFile;
 
+@Slf4j
 class JSONFlatten {
+    @Test
+    void testResourceFile() {
+        try {
+            final File file1 = getFile("src/test/resources/sample.json");
+            System.out.println(IOUtils.toString(new FileReader(file1)));
+        } catch (IOException e) {
+            log.error(e.getLocalizedMessage(),e);
+        }
+    }
 
     @Test
+    @Disabled
     void flatten() {
 
-        JSONParser parser = new JSONParser();
+        JSONParser parser = new JSONParser(JSONParser.MODE_JSON_SIMPLE);
         try {
+
             File file = getFile("src/test/java/gist/json/file.json");
             System.out.println( "file=" + file);
 
@@ -41,7 +57,7 @@ class JSONFlatten {
             String nestedJson = JsonUnflattener.unflatten(flattenedJson);
             //System.out.println("\n=====Unflatten it back to original JSON===== \n" + nestedJson);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage(), e);
         }
     }
 

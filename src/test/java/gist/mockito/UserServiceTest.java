@@ -17,7 +17,7 @@ public class UserServiceTest {
     @Mock
     UserManager userManager;
 
-    @DisplayName("Use of Mockito for saving UserManager.")
+    @DisplayName("'Use of Mockito for saving UserManager'")
     @Test
     void save() {
         final String name = "foobar";
